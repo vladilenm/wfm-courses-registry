@@ -4,21 +4,39 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { CoursesListComponent } from './courses-list/courses-list.component';
-import { CoursesTableComponent } from './courses-table/courses-table.component';
+import { CoursesListComponent } from './shared/courses-list/courses-list.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CoursesComponent } from './courses/courses.component';
+import { PeopleComponent } from './people/people.component';
+import { CoursesAddComponent } from './courses/courses-add/courses-add.component';
+import { CourseComponent } from './course/course.component';
+import { CoursePersonComponent } from './course/course-person/course-person.component';
+import { CoursesService } from './shared/courses.service';
+import { PeopleService } from './shared/people.service';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CoursesListComponent,
-    CoursesTableComponent
+    CoursePersonComponent,
+    HomeComponent,
+    HeaderComponent,
+    CoursesComponent,
+    PeopleComponent,
+    CoursesAddComponent,
+    CourseComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [CoursesService, PeopleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

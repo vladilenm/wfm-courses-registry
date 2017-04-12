@@ -1,0 +1,13 @@
+<input type="text" class="form-control" placeholder="Найти курс" [(ngModel)]="courseFilter">
+<hr>
+<div class="list-group">
+  <a
+    href="#"
+    *ngFor="let course of courses | filter:courseFilter:'name'"
+    routerLinkActive="active"
+    [routerLink]="['/course', course.id]"
+    class="list-group-item"
+  >
+    {{ course.name }}
+  </a>
+</div>
