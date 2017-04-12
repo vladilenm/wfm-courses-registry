@@ -10,12 +10,12 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoursesComponent } from './courses/courses.component';
 import { PeopleComponent } from './people/people.component';
-import { CoursesAddComponent } from './courses/courses-add/courses-add.component';
 import { CourseComponent } from './course/course.component';
 import { CoursePersonComponent } from './course/course-person/course-person.component';
 import { CoursesService } from './shared/courses.service';
 import { PeopleService } from './shared/people.service';
 import { FilterPipe } from './shared/filter.pipe';
+import { CourseRowComponent } from './courses/course-row/course-row.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +26,9 @@ import { FilterPipe } from './shared/filter.pipe';
     HeaderComponent,
     CoursesComponent,
     PeopleComponent,
-    CoursesAddComponent,
     CourseComponent,
-    FilterPipe
+    FilterPipe,
+    CourseRowComponent
   ],
   imports: [
     BrowserModule,

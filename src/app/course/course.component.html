@@ -4,6 +4,12 @@
   </div>
   <div class="col-xs-12 col-md-9">
     <div *ngIf="people.length > 0">
+      <div class="row">
+        <div class="col-xs-12">
+          <input type="text" class="form-control" placeholder="Найти человека" [(ngModel)]="peopleSearch">
+        </div>
+      </div>
+      <hr>
       <table class="table table-striped">
         <thead>
         <tr>
@@ -15,7 +21,12 @@
         </tr>
         </thead>
         <tbody>
-          <tr app-course-person [person]="person" [index]="i" *ngFor="let person of people; let i = index"></tr>
+          <tr
+            app-course-person
+            [person]="person"
+            [index]="i"
+            *ngFor="let person of people | filter:peopleSearch:'email'; let i = index"
+          ></tr>
         </tbody>
       </table>
     </div>

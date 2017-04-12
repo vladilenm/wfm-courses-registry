@@ -31,4 +31,12 @@ export class CoursesService {
   public getCourses(): Course[] {
     return this.courses;
   }
+
+  public updateCourse(id: number, name: string): void {
+    this.courses.find(c => c.id === id).name = name;
+  }
+
+  public addCourse(course: Course): void {
+    this.courses.push(course);
+  }
 }

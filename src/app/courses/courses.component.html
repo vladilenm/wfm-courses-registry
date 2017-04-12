@@ -1,6 +1,25 @@
 <div class="row">
+  <div class="col-xs-9">
+    <input type="text" class="form-control" [(ngModel)]="newCourseName">
+  </div>
+  <div class="col-xs-3">
+    <button class="btn btn-success" (click)="onAdd()">Добавить курс</button>
+  </div>
+</div>
+<hr>
+<div class="row">
   <div class="col-xs-12">
-    <a [routerLink]="['/courses', 'add']" class="btn btn-primary">Добавить курс</a>
-    <router-outlet></router-outlet>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="th-id">ID</th>
+        <th>Название</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr app-course-row [course]="course" *ngFor="let course of courses"></tr>
+      </tbody>
+    </table>
   </div>
 </div>

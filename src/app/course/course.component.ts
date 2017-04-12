@@ -11,6 +11,7 @@ import { Person } from '../shared/person.model';
 export class CourseComponent implements OnInit {
 
   private people: Person[];
+  private peopleSearch: string = '';
 
   constructor(private route: ActivatedRoute, private peopleService: PeopleService) { }
 
