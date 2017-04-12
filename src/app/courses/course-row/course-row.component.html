@@ -1,0 +1,7 @@
+<th>{{ course.id }}</th>
+<td>
+  <input type="text" #input [ngModel]="course.name" class="form-control">
+</td>
+<td>
+  <button class="btn btn-success pull-right" (click)="onUpdate(input.value)">Сохранить</button>
+</td>
