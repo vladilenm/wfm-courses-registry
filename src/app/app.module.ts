@@ -19,6 +19,7 @@ import { FilterPipe } from './shared/filter.pipe';
 import { CourseRowComponent } from './courses/course-row/course-row.component';
 import { PeopleFormComponent } from './people/people-form/people-form.component';
 import { PersonComponent } from './person/person.component';
+import { HttpService } from './shared/http.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { PersonComponent } from './person/person.component';
     AppRoutingModule,
     MyDatePickerModule
   ],
-  providers: [CoursesService, PeopleService],
+  providers: [CoursesService, PeopleService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
