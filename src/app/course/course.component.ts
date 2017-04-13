@@ -10,7 +10,7 @@ import { Person } from '../shared/person.model';
 })
 export class CourseComponent implements OnInit {
 
-  private people: Person[];
+  private people = [];
   private peopleSearch: string = '';
 
   constructor(private route: ActivatedRoute, private peopleService: PeopleService) { }
@@ -18,7 +18,10 @@ export class CourseComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        this.people = this.peopleService.getPeople(+params['id']);
+        this.peopleService.getPeople(+params['id'])
+          .subscribe((people) => {
+            this.people = people;
+          });
       }
     );
   }

@@ -15,6 +15,7 @@ export class PersonComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         const id = +params['id'];
+        console.log('ID', id);
         // this.peopleService.getPerson(id);
       }
     );

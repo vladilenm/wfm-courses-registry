@@ -10,12 +10,16 @@ import { Course } from '../shared/course.model';
 })
 export class CoursesComponent implements OnInit {
   private form: FormGroup;
-  private courses: Course[];
+  private courses: Course[] = [];
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
+
+    this.coursesService.getCourses()
+      .subscribe((courses: Course[]) => {
+        this.courses = courses;
+      });
 
     this.form = new FormGroup({
       'name': new FormControl(null, Validators.required)
@@ -23,11 +27,9 @@ export class CoursesComponent implements OnInit {
   }
 
   onSubmit() {
-    let id = this.courses[this.courses.length - 1].id;
     this.coursesService.addCourse({
-      name: this.form.get('name').value,
-      id: ++id
-    });
+      name: this.form.get('name').value
+    }).subscribe((course: Course) => this.courses.push(course));
     this.form.reset();
   }
 
@@ -35,7 +37,10 @@ export class CoursesComponent implements OnInit {
     const courseName = this.courses.filter(c => c.id === id)[0].name;
     const shouldDelete = confirm(`Вы уверены, что хотите удалить курс ${courseName}`);
     if (shouldDelete) {
-      this.courses = this.coursesService.deleteCourse(id);
+      this.coursesService.deleteCourse(id)
+        .subscribe(({id}) => {
+          this.courses = this.courses.filter(c => c.id !== id);
+        });
     }
   }
 

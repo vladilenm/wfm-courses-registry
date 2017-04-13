@@ -8,12 +8,15 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./courses-list.component.css']
 })
 export class CoursesListComponent implements OnInit {
-  private courses: Course[];
+  private courses: Course[] = [];
   private courseFilter: string = '';
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
+    this.coursesService.getCourses()
+      .subscribe((courses) => {
+        this.courses = courses;
+      });
   }
 }

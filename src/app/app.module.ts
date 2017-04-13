@@ -17,9 +17,9 @@ import { CoursesService } from './shared/courses.service';
 import { PeopleService } from './shared/people.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { CourseRowComponent } from './courses/course-row/course-row.component';
-import { PeopleFormComponent } from './people/people-form/people-form.component';
 import { PersonComponent } from './person/person.component';
 import { HttpService } from './shared/http.service';
+import { PeopleFormComponent } from './shared/people-form/people-form.component';
 
 @NgModule({
   declarations: [

@@ -1,25 +1,49 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import * as $ from 'jquery';
+import {Course} from "./course.model";
 
 @Injectable()
 export class HttpService {
 
-  private headers: Headers = new Headers({
-    'Content-Type': 'x-www-form-urlencoded'
-  });
-
   constructor(private http: Http) {}
 
-  getCourses() {
-    return this.http.get(this.getUrl({
+  public getCourses() {
+    return this.sendRequest({
       operation: 'getCourses'
-    }), {headers: this.headers})
-      .map((response: Response) => response.json());
+    });
+  }
+
+  public createCourse(params: any) {
+    params.operation = 'createCourse';
+    return this.sendRequest(params);
+  }
+
+  public updateCourse(course: any) {
+    course.operation = 'updateCourse';
+    return this.sendRequest(course);
+  }
+
+  public deleteCourse(params: any) {
+    params.operation = 'deleteCourse';
+    return this.sendRequest(params);
+  }
+
+  public getPeople(params: any) {
+    params.operation = 'getPeople';
+    return this.sendRequest(params);
+  }
+
+  public createPerson(params: any) {
+    params.operation = 'createPerson';
+    return this.sendRequest(params);
+  }
+
+  private sendRequest(params: any) {
+    return this.http.get(this.getUrl(params)).map((response: Response) => response.json());
   }
 
   private getUrl(params: any): string {
-    const string = $.param(params);
-    return 'https://webformyself.com/oursupport/backend/?' + string;
+    return 'https://webformyself.com/oursupport/backend/?' + $.param(params);
   }
 }

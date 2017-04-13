@@ -16,10 +16,14 @@ export class CourseRowComponent {
   }
 
   onUpdate(newName: string) {
-    this.coursesService.updateCourse(this.course.id, newName);
+    this.coursesService.updateCourse(this.course.id, newName)
+      .subscribe((course) => {
+        this.course = course;
+      });
   }
 
   onDelete(): void {
+    // this.coursesService.deleteCourse(this.course.id);
     this.deleted.emit(this.course.id);
   }
 

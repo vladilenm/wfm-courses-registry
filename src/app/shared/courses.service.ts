@@ -8,23 +8,19 @@ export class CoursesService {
 
   constructor(private http: HttpService) {}
 
-  public getCourses(): Course[] {
-    this.http.getCourses()
-      .subscribe((courses) => {
-        console.log('dsadas', courses);
-      });
-    return this.courses;
+  public getCourses() {
+    return this.http.getCourses();
   }
 
-  public updateCourse(id: number, name: string): void {
-    this.courses.find(c => c.id === id).name = name;
+  public updateCourse(id: number, name: string) {
+    return this.http.updateCourse({courseId: id, name});
   }
 
-  public addCourse(course: Course): void {
-    this.courses.push(course);
+  public addCourse(name) {
+    return this.http.createCourse(name);
   }
 
-  public deleteCourse(id: number): Course[] {
-    return this.courses = this.courses.filter(c => c.id !== id);
+  public deleteCourse(id: number) {
+    return this.http.deleteCourse({courseId: id});
   }
 }

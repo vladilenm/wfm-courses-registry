@@ -1,9 +1,9 @@
 <th>{{ index + 1 }}</th>
 <td>{{ person.email }}</td>
-<td>{{ person.date.start | date:'dd.MM.yyyy' }}</td>
-<td>{{ person.date.end | date:'dd.MM.yyyy'  }}</td>
+<td>{{ person.dateStart }}</td>
+<td>{{ person.dateEnd }}</td>
 <td class="center">
-  <a href="" class="btn btn-sm btn-primary">
+  <a [routerLink]="['/person', person.id]" class="btn btn-sm btn-primary">
     <span class="glyphicon glyphicon-pencil"></span>
   </a>
 </td>

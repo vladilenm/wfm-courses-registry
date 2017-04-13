@@ -1,55 +1,19 @@
 import { Person } from './person.model';
+import { Injectable } from '@angular/core';
+import { HttpService } from './http.service';
 
+@Injectable()
 export class PeopleService {
-  private people: Person[] = [
-    {
-      email: 'email@mail.ru',
-      course: 1,
-      date: {
-        start: 1323123123233,
-        end: 12312324123421
-      }
-    },
-    {
-      email: 'email1@mail2.ru',
-      course: 1,
-      date: {
-        start: 1323123321223,
-        end: 1231232412211
-      }
-    },
-    {
-      email: 'email1@mail2.ru',
-      course: 2,
-      date: {
-        start: 1323123321223,
-        end: 1231232412211
-      }
-    },
-    {
-      email: 'email1@mail2.ru',
-      course: 1,
-      date: {
-        start: 1323123321223,
-        end: 1231232412211
-      }
-    },
-    {
-      email: 'email1@mail2.ru',
-      course: 2,
-      date: {
-        start: 1323123321223,
-        end: 1231232412211
-      }
-    }
-  ];
+  private people: Person[] = [];
 
-  public getPeople(id: number): Person[] {
-    return this.people.filter(person => person.course === id);
+  constructor(private http: HttpService) {}
+
+  public getPeople(id: number) {
+    return this.http.getPeople({courseId: id});
   }
 
-  public addPerson(person: Person) {
-    this.people.push(person);
+  public addPerson(person) {
+    return this.http.createPerson(person);
   }
 
   // public getPerson(): Person {
