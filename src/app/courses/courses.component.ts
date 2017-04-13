@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoursesService } from '../shared/courses.service';
 import { Course } from '../shared/course.model';
 
@@ -8,23 +9,34 @@ import { Course } from '../shared/course.model';
   styleUrls: ['./courses.component.css']
 })
 export class CoursesComponent implements OnInit {
-
-  private newCourseName: string;
+  private form: FormGroup;
   private courses: Course[];
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
     this.courses = this.coursesService.getCourses();
+
+    this.form = new FormGroup({
+      'name': new FormControl(null, Validators.required)
+    });
   }
 
-  public onAdd() {
-    if (this.newCourseName === '') {
-      return;
-    }
+  onSubmit() {
     let id = this.courses[this.courses.length - 1].id;
-    this.coursesService.addCourse({id: ++id, name: this.newCourseName});
-    this.newCourseName = '';
+    this.coursesService.addCourse({
+      name: this.form.get('name').value,
+      id: ++id
+    });
+    this.form.reset();
+  }
+
+  onDelete(id: number) {
+    const courseName = this.courses.filter(c => c.id === id)[0].name;
+    const shouldDelete = confirm(`Вы уверены, что хотите удалить курс ${courseName}`);
+    if (shouldDelete) {
+      this.courses = this.coursesService.deleteCourse(id);
+    }
   }
 
 }

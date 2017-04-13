@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from '../../shared/course.model';
 import { CoursesService } from '../../shared/courses.service';
 
@@ -10,12 +10,17 @@ import { CoursesService } from '../../shared/courses.service';
 export class CourseRowComponent {
 
   @Input() course: Course;
+  @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private coursesService: CoursesService) {
   }
 
   onUpdate(newName: string) {
-    this.coursesService.updateCourse(this.course.id, newName)
+    this.coursesService.updateCourse(this.course.id, newName);
+  }
+
+  onDelete(): void {
+    this.deleted.emit(this.course.id);
   }
 
 }

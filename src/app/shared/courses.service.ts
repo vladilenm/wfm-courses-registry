@@ -39,4 +39,8 @@ export class CoursesService {
   public addCourse(course: Course): void {
     this.courses.push(course);
   }
+
+  public deleteCourse(id: number): Course[] {
+    return this.courses = this.courses.filter(c => c.id !== id);
+  }
 }

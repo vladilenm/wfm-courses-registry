@@ -1,12 +1,13 @@
-<div class="row">
-  <div class="col-xs-9">
-    <input type="text" class="form-control" [(ngModel)]="newCourseName">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="row">
+  <div class="form-group col-xs-9" [ngClass]="{'has-error': !form.get('name').valid && form.get('name').touched}">
+    <input type="text" class="form-control" formControlName="name" placeholder="Название курса">
+    <span *ngIf="!form.get('name').valid && form.get('name').touched" class="help-block">Название курса некорректное</span>
   </div>
   <div class="col-xs-3">
-    <button class="btn btn-success" (click)="onAdd()">Добавить курс</button>
+    <button class="btn btn-success" type="submit" [disabled]="!form.valid">Добавить курс</button>
   </div>
-</div>
-<hr>
+</form>
+
 <div class="row">
   <div class="col-xs-12">
     <table class="table table-striped">
@@ -14,11 +15,11 @@
       <tr>
         <th class="th-id">ID</th>
         <th>Название</th>
-        <th></th>
+        <th>Действие</th>
       </tr>
       </thead>
       <tbody>
-      <tr app-course-row [course]="course" *ngFor="let course of courses"></tr>
+        <tr app-course-row [course]="course" *ngFor="let course of courses" (deleted)="onDelete($event)"></tr>
       </tbody>
     </table>
   </div>

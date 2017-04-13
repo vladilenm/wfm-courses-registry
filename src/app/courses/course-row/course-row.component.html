@@ -3,5 +3,6 @@
   <input type="text" #input [ngModel]="course.name" class="form-control">
 </td>
 <td>
-  <button class="btn btn-success pull-right" (click)="onUpdate(input.value)">Сохранить</button>
+  <button class="btn btn-danger btn-sm" (click)="onDelete()">Удалить</button>
+  <button class="btn btn-success btn-sm" (click)="onUpdate(input.value)">Сохранить</button>
 </td>

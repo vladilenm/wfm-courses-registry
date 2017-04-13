@@ -47,4 +47,12 @@ export class PeopleService {
   public getPeople(id: number): Person[] {
     return this.people.filter(person => person.course === id);
   }
+
+  public addPerson(person: Person) {
+    this.people.push(person);
+  }
+
+  // public getPerson(): Person {
+  //   // return this.people.filter()
+  // }
 }

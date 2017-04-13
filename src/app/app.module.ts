@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { AppComponent } from './app.component';
 import { CoursesListComponent } from './shared/courses-list/courses-list.component';
@@ -16,6 +17,8 @@ import { CoursesService } from './shared/courses.service';
 import { PeopleService } from './shared/people.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { CourseRowComponent } from './courses/course-row/course-row.component';
+import { PeopleFormComponent } from './people/people-form/people-form.component';
+import { PersonComponent } from './person/person.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +31,17 @@ import { CourseRowComponent } from './courses/course-row/course-row.component';
     PeopleComponent,
     CourseComponent,
     FilterPipe,
-    CourseRowComponent
+    CourseRowComponent,
+    PeopleFormComponent,
+    PersonComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MyDatePickerModule
   ],
   providers: [CoursesService, PeopleService],
   bootstrap: [AppComponent]

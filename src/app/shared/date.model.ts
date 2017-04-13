@@ -1,3 +1,3 @@
 export class Boundary {
-  constructor(public start: number, public end: number) {}
+  constructor(public start: any, public end: any) {}
 }
