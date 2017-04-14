@@ -21,6 +21,7 @@ import { PersonComponent } from './person/person.component';
 import { HttpService } from './shared/http.service';
 import { PeopleFormComponent } from './shared/people-form/people-form.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { WFMDatePipe } from './shared/date.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LoaderComponent } from './shared/loader/loader.component';
     CourseRowComponent,
     PeopleFormComponent,
     PersonComponent,
-    LoaderComponent
+    LoaderComponent,
+    WFMDatePipe
   ],
   imports: [
     BrowserModule,

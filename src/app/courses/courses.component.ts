@@ -13,6 +13,7 @@ import swal from 'sweetalert2';
 export class CoursesComponent implements OnInit {
   private form: FormGroup;
   private courses: Course[] = [];
+  private isLoading = true;
 
   constructor(private coursesService: CoursesService) { }
 
@@ -20,6 +21,7 @@ export class CoursesComponent implements OnInit {
 
     this.coursesService.getCourses()
       .subscribe((courses: Course[]) => {
+        this.isLoading = false;
         this.courses = courses;
       });
 
@@ -48,8 +50,8 @@ export class CoursesComponent implements OnInit {
       cancelButtonText: 'Отмена',
     }).then(() => {
       this.coursesService.deleteCourse(id)
-        .subscribe(({id}) => {
-          this.courses = this.courses.filter(c => c.id !== id);
+        .subscribe(({deletedId}) => {
+          this.courses = this.courses.filter(c => c.id !== deletedId);
         });
     }).catch(() => {});
   }

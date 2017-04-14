@@ -1,6 +1,9 @@
 <input type="text" class="form-control" placeholder="Найти курс" [(ngModel)]="courseFilter">
 <hr>
-<div class="list-group">
+<div class="text-center" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+<div class="list-group" *ngIf="!isLoading && courses.length !== 0">
   <a
     href="#"
     *ngFor="let course of courses | filter:courseFilter:'name'"
@@ -10,4 +13,8 @@
   >
     {{ course.name }}
   </a>
+</div>
+<div class="text-center" *ngIf="!isLoading && courses.length === 0">
+  <h4>Курсов нет</h4>
+  <a href="#" class="btn btn-primary" [routerLink]="['/courses']">Добавить курс</a>
 </div>

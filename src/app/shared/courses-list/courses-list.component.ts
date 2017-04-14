@@ -9,13 +9,15 @@ import { CoursesService } from '../courses.service';
 })
 export class CoursesListComponent implements OnInit {
   private courses: Course[] = [];
-  private courseFilter: string = '';
+  private courseFilter = '';
+  private isLoading = true;
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
     this.coursesService.getCourses()
       .subscribe((courses) => {
+        this.isLoading = false;
         this.courses = courses;
       });
   }

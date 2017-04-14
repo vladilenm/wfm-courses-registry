@@ -8,7 +8,16 @@
   </div>
 </form>
 
-<div class="row">
+
+<div class="text-center" style="margin-top: 50px;" *ngIf="isLoading">
+  <app-loader></app-loader>
+</div>
+
+<div class="text-center" style="margin-top: 50px;" *ngIf="!isLoading && courses.length === 0">
+  <h4>Курсов пока нет</h4>
+</div>
+
+<div class="row" *ngIf="!isLoading && courses.length !== 0">
   <div class="col-xs-12">
     <table class="table table-striped">
       <thead>

@@ -1,7 +1,10 @@
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <div *ngIf="personLoaded">
+    <div *ngIf="!isLoading">
       <app-people-form [person]="person"></app-people-form>
+    </div>
+    <div class="text-center" *ngIf="isLoading">
+      <app-loader></app-loader>
     </div>
   </div>
 </div>

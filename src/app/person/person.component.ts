@@ -10,7 +10,7 @@ import { PeopleService } from '../shared/people.service';
 export class PersonComponent implements OnInit {
 
   private person;
-  private personLoaded: boolean = false;
+  private isLoading = true;
 
   constructor(private route: ActivatedRoute, private peopleService: PeopleService) { }
 
@@ -21,7 +21,7 @@ export class PersonComponent implements OnInit {
         this.peopleService.getPersonById(id)
           .subscribe((person) => {
             this.person = person;
-            this.personLoaded = true;
+            this.isLoading = false;
           });
       }
     );

@@ -3,7 +3,10 @@
     <app-courses-list></app-courses-list>
   </div>
   <div class="col-xs-12 col-md-9">
-    <div *ngIf="people.length > 0">
+    <div class="text-center" *ngIf="isLoading" style="margin-top: 50px;">
+      <app-loader></app-loader>
+    </div>
+    <div *ngIf="people.length > 0 && !isLoading">
       <div class="row">
         <div class="col-xs-12">
           <input type="text" class="form-control" placeholder="Найти человека" [(ngModel)]="peopleSearch">
@@ -25,12 +28,13 @@
             app-course-person
             [person]="person"
             [index]="i"
+            [ngClass]="getClasses(person)"
             *ngFor="let person of people | filter:peopleSearch:'email'; let i = index"
           ></tr>
         </tbody>
       </table>
     </div>
-    <div *ngIf="people.length === 0" class="text-center">
+    <div *ngIf="people.length === 0 && !isLoading" class="text-center">
       <h3>Пока людей нет</h3>
       <a href="" class="btn btn-primary" [routerLink]="['/people']">Добавить человека</a>
     </div>

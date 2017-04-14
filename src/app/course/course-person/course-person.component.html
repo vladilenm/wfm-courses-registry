@@ -1,7 +1,7 @@
 <th>{{ index + 1 }}</th>
 <td>{{ person.email }}</td>
-<td>{{ person.dateStart }}</td>
-<td>{{ person.dateEnd }}</td>
+<td>{{ person.dateStart | wmfDate }}</td>
+<td>{{ person.dateEnd | wmfDate }}</td>
 <td class="center">
   <a [routerLink]="['/person', person.id]" class="btn btn-sm btn-primary">
     <span class="glyphicon glyphicon-pencil"></span>
