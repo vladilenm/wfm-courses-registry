@@ -37,8 +37,8 @@ export class CoursesComponent implements OnInit {
     this.form.reset();
   }
 
-  onDelete(id: number) {
-    const courseName = this.courses.filter(c => c.id === id)[0].name;
+  onDelete(courseId: number) {
+    const courseName = this.courses.filter(c => c.id === courseId)[0].name;
     swal({
       title: 'Подтвердите действие',
       text: `Вы уверены, что хотите удалить курс ${courseName}`,
@@ -49,9 +49,9 @@ export class CoursesComponent implements OnInit {
       confirmButtonText: 'Да, удалить!',
       cancelButtonText: 'Отмена',
     }).then(() => {
-      this.coursesService.deleteCourse(id)
-        .subscribe(({deletedId}) => {
-          this.courses = this.courses.filter(c => c.id !== deletedId);
+      this.coursesService.deleteCourse(courseId)
+        .subscribe(({id}) => {
+          this.courses = this.courses.filter(c => c.id !== id);
         });
     }).catch(() => {});
   }
