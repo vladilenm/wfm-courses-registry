@@ -1,3 +1,4 @@
 input[disabled] {
-  background: #ccc;
+  background-color: #cccccc!important;
+  cursor: not-allowed!important;
 }

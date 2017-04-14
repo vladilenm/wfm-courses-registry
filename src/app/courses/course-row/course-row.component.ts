@@ -23,7 +23,6 @@ export class CourseRowComponent {
   }
 
   onDelete(): void {
-    // this.coursesService.deleteCourse(this.course.id);
     this.deleted.emit(this.course.id);
   }
 

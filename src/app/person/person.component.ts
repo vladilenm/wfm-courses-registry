@@ -9,14 +9,20 @@ import { PeopleService } from '../shared/people.service';
 })
 export class PersonComponent implements OnInit {
 
+  private person;
+  private personLoaded: boolean = false;
+
   constructor(private route: ActivatedRoute, private peopleService: PeopleService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
         const id = +params['id'];
-        console.log('ID', id);
-        // this.peopleService.getPerson(id);
+        this.peopleService.getPersonById(id)
+          .subscribe((person) => {
+            this.person = person;
+            this.personLoaded = true;
+          });
       }
     );
   }

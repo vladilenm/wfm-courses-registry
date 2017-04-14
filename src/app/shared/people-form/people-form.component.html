@@ -1,6 +1,5 @@
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <h3>Добавить пользователя</h3>
+  <h3>{{ actionName }} пользователя</h3>
   <div class="form-group" [ngClass]="{'has-error': !form.get('email').valid && form.get('email').touched}">
     <label for="email">Email</label>
     <input type="text" id="email" class="form-control" formControlName="email" placeholder="Email пользователя">
@@ -17,6 +16,9 @@
     </select>
   </div>
 
-  <button class="btn btn-success" type="submit" [disabled]="!form.valid">Добавить</button>
+  <button class="btn btn-success" type="submit" [disabled]="!form.valid">{{ actionName }}</button>
+  <span class="pull-right" *ngIf="person">
+    <button class="btn btn-danger" type="button" (click)="onDelete()">Удалить</button>
+  </span>
 </form>
 

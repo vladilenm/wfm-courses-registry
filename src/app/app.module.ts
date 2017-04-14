@@ -20,6 +20,7 @@ import { CourseRowComponent } from './courses/course-row/course-row.component';
 import { PersonComponent } from './person/person.component';
 import { HttpService } from './shared/http.service';
 import { PeopleFormComponent } from './shared/people-form/people-form.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PeopleFormComponent } from './shared/people-form/people-form.component'
     FilterPipe,
     CourseRowComponent,
     PeopleFormComponent,
-    PersonComponent
+    PersonComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

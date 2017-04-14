@@ -16,7 +16,19 @@ export class PeopleService {
     return this.http.createPerson(person);
   }
 
-  // public getPerson(): Person {
-  //   // return this.people.filter()
-  // }
+  public updatePerson(person) {
+    return this.http.updatePerson(person);
+  }
+
+  public deletePerson(id) {
+    return this.http.deletePerson({id});
+  }
+
+  public getPersonById(id) {
+    return this.http.getPersonById({id});
+  }
+
+  public getPersonCourses(email) {
+    return this.http.getPersonCourses({email});
+  }
 }

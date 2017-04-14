@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CoursesService } from '../shared/courses.service';
 import { Course } from '../shared/course.model';
 
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
@@ -35,13 +37,21 @@ export class CoursesComponent implements OnInit {
 
   onDelete(id: number) {
     const courseName = this.courses.filter(c => c.id === id)[0].name;
-    const shouldDelete = confirm(`Вы уверены, что хотите удалить курс ${courseName}`);
-    if (shouldDelete) {
+    swal({
+      title: 'Подтвердите действие',
+      text: `Вы уверены, что хотите удалить курс ${courseName}`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Да, удалить!',
+      cancelButtonText: 'Отмена',
+    }).then(() => {
       this.coursesService.deleteCourse(id)
         .subscribe(({id}) => {
           this.courses = this.courses.filter(c => c.id !== id);
         });
-    }
+    }).catch(() => {});
   }
 
 }

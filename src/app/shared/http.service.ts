@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import * as $ from 'jquery';
-import {Course} from "./course.model";
 
 @Injectable()
 export class HttpService {
@@ -36,6 +35,26 @@ export class HttpService {
 
   public createPerson(params: any) {
     params.operation = 'createPerson';
+    return this.sendRequest(params);
+  }
+
+  public getPersonCourses(params: any) {
+    params.operation = 'getPersonCourses';
+    return this.sendRequest(params);
+  }
+
+  public getPersonById(params: any) {
+    params.operation = 'getPersonCourse';
+    return this.sendRequest(params);
+  }
+
+  public updatePerson(params: any) {
+    params.operation = 'updatePerson';
+    return this.sendRequest(params);
+  }
+
+  public deletePerson(params: any) {
+    params.operation = 'deletePerson';
     return this.sendRequest(params);
   }
 

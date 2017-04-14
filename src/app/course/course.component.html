@@ -30,6 +30,9 @@
         </tbody>
       </table>
     </div>
-    <h3 class="text-center" *ngIf="people.length === 0">Пока людей нет</h3>
+    <div *ngIf="people.length === 0" class="text-center">
+      <h3>Пока людей нет</h3>
+      <a href="" class="btn btn-primary" [routerLink]="['/people']">Добавить человека</a>
+    </div>
   </div>
 </div>
