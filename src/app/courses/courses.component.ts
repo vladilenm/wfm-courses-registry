@@ -66,12 +66,7 @@ export class CoursesComponent implements OnInit {
             'Курс успешно удален'
           );
         });
-    }).catch(() => {
-      this.notifications.error(
-        'Уведомление',
-        'Ошибка сервера'
-      );
-    });
+    }).catch(() => {});
   }
 
 }

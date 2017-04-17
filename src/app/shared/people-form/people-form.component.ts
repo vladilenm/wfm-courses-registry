@@ -116,12 +116,7 @@ export class PeopleFormComponent implements OnInit {
         .subscribe((res) => {
           this.router.navigate(['/course', 1]);
         });
-    }).catch(() => {
-      this.notifications.error(
-        'Уведомление',
-        'Ошибка сервера'
-      );
-    });
+    }).catch(() => {});
   }
 
   onSubmit() {
