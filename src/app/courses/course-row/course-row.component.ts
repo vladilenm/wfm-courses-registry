@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from '../../shared/course.model';
 import { CoursesService } from '../../shared/courses.service';
+import { notifyOptions } from '../../shared/notify.options';
+import { NotificationsService } from 'angular2-notifications/dist';
 
 @Component({
   selector: '[app-course-row]',
@@ -11,14 +13,21 @@ export class CourseRowComponent {
 
   @Input() course: Course;
   @Output() deleted: EventEmitter<number> = new EventEmitter<number>();
+  private options = notifyOptions;
 
-  constructor(private coursesService: CoursesService) {
+  constructor(private coursesService: CoursesService, private notifications: NotificationsService) {
   }
 
   onUpdate(newName: string) {
     this.coursesService.updateCourse(this.course.id, newName)
       .subscribe((course) => {
-        this.course = course;
+        if (!Array.isArray(course)) {
+          this.course = course;
+        }
+        this.notifications.success(
+          'Уведомление',
+          'Курс успешно обновлен'
+        );
       });
   }
 

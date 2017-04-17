@@ -7,6 +7,8 @@ import { CoursesService } from '../courses.service';
 import { PeopleService } from '../people.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { notifyOptions } from '../notify.options';
+import { NotificationsService } from 'angular2-notifications/dist';
 
 @Component({
   selector: 'app-people-form',
@@ -20,6 +22,7 @@ export class PeopleFormComponent implements OnInit {
   private myDatePickerOptions: IMyOptions = {
     dateFormat: 'dd.mm.yyyy',
   };
+  private options = notifyOptions;
 
   @Input() person;
 
@@ -28,7 +31,8 @@ export class PeopleFormComponent implements OnInit {
   constructor(
     private coursesService: CoursesService,
     private peopleService: PeopleService,
-    private router: Router
+    private router: Router,
+    private notifications: NotificationsService
   ) { }
 
   ngOnInit() {
@@ -112,7 +116,12 @@ export class PeopleFormComponent implements OnInit {
         .subscribe((res) => {
           this.router.navigate(['/course', 1]);
         });
-    }).catch(() => {});
+    }).catch(() => {
+      this.notifications.error(
+        'Уведомление',
+        'Ошибка сервера'
+      );
+    });
   }
 
   onSubmit() {
@@ -129,6 +138,11 @@ export class PeopleFormComponent implements OnInit {
         .subscribe((response) => {
           if (response.error) {
             swal('Oops...', response.error, 'error');
+          } else {
+            this.notifications.success(
+              'Уведомление',
+              'Пользователь добавлен'
+            );
           }
         });
       this.form.reset();
@@ -142,6 +156,11 @@ export class PeopleFormComponent implements OnInit {
         .subscribe((response) => {
           if (response.error) {
             swal('Oops...', response.error, 'error');
+          } else {
+            this.notifications.success(
+              'Уведомление',
+              'Пользователь обновлен'
+            );
           }
         });
     }

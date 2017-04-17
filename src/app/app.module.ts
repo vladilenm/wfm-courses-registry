@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MyDatePickerModule } from 'mydatepicker';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+
 
 import { AppComponent } from './app.component';
 import { CoursesListComponent } from './shared/courses-list/courses-list.component';
@@ -46,7 +48,8 @@ import { WFMDatePipe } from './shared/date.pipe';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [CoursesService, PeopleService, HttpService],
   bootstrap: [AppComponent]

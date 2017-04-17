@@ -8,7 +8,7 @@
   <my-date-picker [options]="myDatePickerOptions"
                   formControlName="start" (dateChanged)="onStartChanged($event)"></my-date-picker>
   <my-date-picker [options]="myDatePickerOptions"
-                  formControlName="end" [disabled]="true"></my-date-picker>
+                  formControlName="end"></my-date-picker>
   <div class="form-group">
     <label for="course">Выберите курс</label>
     <select id="course" class="form-control" formControlName="course">
@@ -21,4 +21,6 @@
     <button class="btn btn-danger" type="button" (click)="onDelete()">Удалить</button>
   </span>
 </form>
+
+<simple-notifications [options]="options"></simple-notifications>
 

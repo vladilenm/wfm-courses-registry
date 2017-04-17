@@ -4,6 +4,8 @@ import { CoursesService } from '../shared/courses.service';
 import { Course } from '../shared/course.model';
 
 import swal from 'sweetalert2';
+import { NotificationsService } from 'angular2-notifications/dist';
+import { notifyOptions } from '../shared/notify.options';
 
 @Component({
   selector: 'app-courses',
@@ -14,8 +16,9 @@ export class CoursesComponent implements OnInit {
   private form: FormGroup;
   private courses: Course[] = [];
   private isLoading = true;
+  private options = notifyOptions;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService, private notifications: NotificationsService) { }
 
   ngOnInit() {
 
@@ -33,7 +36,13 @@ export class CoursesComponent implements OnInit {
   onSubmit() {
     this.coursesService.addCourse({
       name: this.form.get('name').value
-    }).subscribe((course: Course) => this.courses.push(course));
+    }).subscribe((course: Course) => {
+      this.notifications.success(
+        'Уведомление',
+        'Курс успешно добавлен'
+      );
+      this.courses.push(course);
+    });
     this.form.reset();
   }
 
@@ -52,8 +61,17 @@ export class CoursesComponent implements OnInit {
       this.coursesService.deleteCourse(courseId)
         .subscribe(({id}) => {
           this.courses = this.courses.filter(c => c.id !== id);
+          this.notifications.success(
+            'Уведомление',
+            'Курс успешно удален'
+          );
         });
-    }).catch(() => {});
+    }).catch(() => {
+      this.notifications.error(
+        'Уведомление',
+        'Ошибка сервера'
+      );
+    });
   }
 
 }
