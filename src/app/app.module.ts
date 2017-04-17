@@ -24,6 +24,9 @@ import { HttpService } from './shared/http.service';
 import { PeopleFormComponent } from './shared/people-form/people-form.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { WFMDatePipe } from './shared/date.pipe';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './shared/auth.service';
+import { AuthGuard } from './shared/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { WFMDatePipe } from './shared/date.pipe';
     PeopleFormComponent,
     PersonComponent,
     LoaderComponent,
-    WFMDatePipe
+    WFMDatePipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,7 @@ import { WFMDatePipe } from './shared/date.pipe';
     MyDatePickerModule,
     SimpleNotificationsModule.forRoot()
   ],
-  providers: [CoursesService, PeopleService, HttpService],
+  providers: [CoursesService, PeopleService, HttpService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

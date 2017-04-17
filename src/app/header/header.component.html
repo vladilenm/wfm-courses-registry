@@ -6,8 +6,11 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a href="#" [routerLink]="['/courses']">Курсы</a></li>
-        <li routerLinkActive="active"><a href="#" [routerLink]="'/people'">Люди</a></li>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <li routerLinkActive="active"><a href="#" [routerLink]="['/courses']">Курсы</a></li>
+          <li routerLinkActive="active"><a href="#" [routerLink]="['/people']">Люди</a></li>
+          <li><a style="cursor: pointer;" (click)="authService.logout()">Выйти</a></li>
+        </ng-template>
       </ul>
     </div>
   </div>

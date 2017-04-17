@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form (ngSubmit)="onLogin(f)" #f="ngForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" email required id="email" name="email" ngModel>
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" class="form-control" required id="password" name="password" ngModel>
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Войти</button>
+    </form>
+  </div>
+</div>

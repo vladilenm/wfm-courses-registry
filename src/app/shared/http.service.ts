@@ -8,57 +8,53 @@ export class HttpService {
   constructor(private http: Http) {}
 
   public getCourses() {
-    return this.sendRequest({
-      operation: 'getCourses'
-    });
+    return this.sendRequest({}, 'getCourses');
   }
 
   public createCourse(params: any) {
-    params.operation = 'createCourse';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'createCourse');
   }
 
   public updateCourse(course: any) {
-    course.operation = 'updateCourse';
-    return this.sendRequest(course);
+    return this.sendRequest(course, 'updateCourse');
   }
 
   public deleteCourse(params: any) {
-    params.operation = 'deleteCourse';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'deleteCourse');
   }
 
   public getPeople(params: any) {
-    params.operation = 'getPeople';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'getPeople');
   }
 
   public createPerson(params: any) {
-    params.operation = 'createPerson';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'createPerson');
   }
 
   public getPersonCourses(params: any) {
-    params.operation = 'getPersonCourses';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'getPersonCourses');
   }
 
   public getPersonById(params: any) {
-    params.operation = 'getPersonCourse';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'getPersonCourse');
   }
 
   public updatePerson(params: any) {
-    params.operation = 'updatePerson';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'updatePerson');
   }
 
   public deletePerson(params: any) {
-    params.operation = 'deletePerson';
-    return this.sendRequest(params);
+    return this.sendRequest(params, 'deletePerson');
   }
 
-  private sendRequest(params: any) {
+  public auth(params: any) {
+    params.operation = 'auth';
+    return this.http.post('https://webformyself.com/oursupport/backend/', params)
+      .map((response: Response) => response.json());
+  }
+
+  private sendRequest(params: any, operation: string) {
+    params.operation = operation;
     return this.http.get(this.getUrl(params)).map((response: Response) => response.json());
   }
 

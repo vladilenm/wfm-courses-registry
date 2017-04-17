@@ -6,14 +6,17 @@ import { CoursesComponent } from './courses/courses.component';
 import { PeopleComponent } from './people/people.component';
 import { CourseComponent } from './course/course.component';
 import { PersonComponent } from './person/person.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './shared/auth-guard.service';
 
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'course/:id', component: CourseComponent},
-  {path: 'person/:id', component: PersonComponent},
-  {path: 'courses', component: CoursesComponent},
-  {path: 'people', component: PeopleComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'course/:id', component: CourseComponent, canActivate: [AuthGuard]},
+  {path: 'person/:id', component: PersonComponent, canActivate: [AuthGuard]},
+  {path: 'courses', component: CoursesComponent, canActivate: [AuthGuard]},
+  {path: 'people', component: PeopleComponent, canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent},
   {path: '**', component: HomeComponent},
 ];
 
