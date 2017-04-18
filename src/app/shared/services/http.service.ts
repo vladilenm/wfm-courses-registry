@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import * as $ from 'jquery';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class HttpService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private authService: AuthService) {
+  }
 
   public getCourses() {
     return this.sendRequest({}, 'getCourses');
@@ -47,14 +49,9 @@ export class HttpService {
     return this.sendRequest(params, 'deletePerson');
   }
 
-  public auth(params: any) {
-    params.operation = 'auth';
-    return this.http.post('https://webformyself.com/oursupport/backend/', params)
-      .map((response: Response) => response.json());
-  }
-
   private sendRequest(params: any, operation: string) {
     params.operation = operation;
+    params.token = this.authService.getToken();
     return this.http.get(this.getUrl(params)).map((response: Response) => response.json());
   }
 

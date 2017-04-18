@@ -3,7 +3,7 @@
     <form (ngSubmit)="onLogin(f)" #f="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control" email required id="email" name="email" ngModel>
+        <input type="text" class="form-control" required id="email" name="email" ngModel>
       </div>
       <div class="form-group">
         <label for="password">Пароль</label>
@@ -13,3 +13,5 @@
     </form>
   </div>
 </div>
+
+<simple-notifications [options]="options"></simple-notifications>

@@ -1,21 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications/dist';
+import { AuthService } from '../shared/services/auth.service';
+import { notifyOptions } from '../shared/constants';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(private authService: AuthService) { }
+  public options = notifyOptions;
 
-  ngOnInit() {
+  constructor(private authService: AuthService, private notifications: NotificationsService, private router: Router) {
   }
 
   onLogin(form: NgForm) {
     const {email, password} = form.value;
-    this.authService.loginUser(email, password);
+    this.authService.loginUser(email, password)
+      .subscribe((response) => {
+        if (response['error']) {
+          this.notifications.error('Ошибка', response.error);
+        } else {
+          this.authService.setToken(response['token']);
+          this.router.navigate(['/']);
+        }
+      });
   }
 }

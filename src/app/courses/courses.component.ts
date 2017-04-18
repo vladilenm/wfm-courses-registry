@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CoursesService } from '../shared/courses.service';
-import { Course } from '../shared/course.model';
+import { CoursesService } from '../shared/services/courses.service';
+import { Course } from '../shared/models/course.model';
 
 import swal from 'sweetalert2';
 import { NotificationsService } from 'angular2-notifications/dist';
-import { notifyOptions } from '../shared/notify.options';
+import { notifyOptions } from '../shared/constants';
 
 @Component({
   selector: 'app-courses',

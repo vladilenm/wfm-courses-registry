@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { PeopleService } from '../shared/people.service';
+import { PeopleService } from '../shared/services/people.service';
 import * as moment from 'moment';
 
 @Component({

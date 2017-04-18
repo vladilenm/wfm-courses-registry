@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Course } from '../../shared/course.model';
-import { CoursesService } from '../../shared/courses.service';
-import { notifyOptions } from '../../shared/notify.options';
+import { Course } from '../../shared/models/course.model';
+import { CoursesService } from '../../shared/services/courses.service';
+import { notifyOptions } from '../../shared/constants';
 import { NotificationsService } from 'angular2-notifications/dist';
 
 @Component({

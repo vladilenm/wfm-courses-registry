@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Person } from '../../shared/person.model';
+import { Person } from '../../shared/models/person.model';
 
 @Component({
   selector: '[app-course-person]',

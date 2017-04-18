@@ -1,4 +1,4 @@
-import { Course } from './course.model';
+import { Course } from '../models/course.model';
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 

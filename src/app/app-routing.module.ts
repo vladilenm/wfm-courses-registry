@@ -7,7 +7,7 @@ import { PeopleComponent } from './people/people.component';
 import { CourseComponent } from './course/course.component';
 import { PersonComponent } from './person/person.component';
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './shared/auth-guard.service';
+import { AuthGuard } from './shared/services/auth-guard.service';
 
 
 const appRoutes: Routes = [

@@ -7,7 +7,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 
 
 import { AppComponent } from './app.component';
-import { CoursesListComponent } from './shared/courses-list/courses-list.component';
+import { CoursesListComponent } from './shared/components/courses-list/courses-list.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,18 +15,18 @@ import { CoursesComponent } from './courses/courses.component';
 import { PeopleComponent } from './people/people.component';
 import { CourseComponent } from './course/course.component';
 import { CoursePersonComponent } from './course/course-person/course-person.component';
-import { CoursesService } from './shared/courses.service';
-import { PeopleService } from './shared/people.service';
-import { FilterPipe } from './shared/filter.pipe';
+import { CoursesService } from './shared/services/courses.service';
+import { PeopleService } from './shared/services/people.service';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 import { CourseRowComponent } from './courses/course-row/course-row.component';
 import { PersonComponent } from './person/person.component';
-import { HttpService } from './shared/http.service';
-import { PeopleFormComponent } from './shared/people-form/people-form.component';
-import { LoaderComponent } from './shared/loader/loader.component';
-import { WFMDatePipe } from './shared/date.pipe';
+import { HttpService } from './shared/services/http.service';
+import { PeopleFormComponent } from './shared/components/people-form/people-form.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+import { WFMDatePipe } from './shared/pipes/date.pipe';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from './shared/auth.service';
-import { AuthGuard } from './shared/auth-guard.service';
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuard } from './shared/services/auth-guard.service';
 
 @NgModule({
   declarations: [

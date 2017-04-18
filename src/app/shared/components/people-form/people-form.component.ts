@@ -2,13 +2,13 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IMyDateModel, IMyOptions } from 'mydatepicker';
 import * as moment from 'moment';
-import { Course } from '../course.model';
-import { CoursesService } from '../courses.service';
-import { PeopleService } from '../people.service';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { notifyOptions } from '../notify.options';
 import { NotificationsService } from 'angular2-notifications/dist';
+import { Course } from '../../models/course.model';
+import { notifyOptions } from '../../constants';
+import { CoursesService } from '../../services/courses.service';
+import { PeopleService } from '../../services/people.service';
 
 @Component({
   selector: 'app-people-form',
@@ -26,20 +26,25 @@ export class PeopleFormComponent implements OnInit {
 
   @Input() person;
 
+  private isEdit = false;
+
   private actionName = 'Добавить';
 
-  constructor(
-    private coursesService: CoursesService,
-    private peopleService: PeopleService,
-    private router: Router,
-    private notifications: NotificationsService
-  ) { }
+  constructor(private coursesService: CoursesService,
+              private peopleService: PeopleService,
+              private router: Router,
+              private notifications: NotificationsService) {
+  }
 
   ngOnInit() {
     this.coursesService.getCourses()
       .subscribe((courses) => {
         this.courses = courses;
       });
+
+    if (this.person) {
+      this.isEdit = true;
+    }
 
     this.form = new FormGroup({
       'email': new FormControl(null, [Validators.required, Validators.email]),
@@ -48,12 +53,12 @@ export class PeopleFormComponent implements OnInit {
       'course': new FormControl(null, Validators.required),
     });
 
-    if (this.person) {
+    if (this.isEdit) {
       this.setPersonValues();
+      this.actionName = 'Редактировать';
     } else {
       this.setDefaultDates();
     }
-
   }
 
   setPersonValues() {
@@ -63,7 +68,6 @@ export class PeopleFormComponent implements OnInit {
       'start': this.getDTValue(moment(this.person.dateStart, 'YYYY.MM.DD')),
       'end': this.getDTValue(moment(this.person.dateEnd, 'YYYY.MM.DD'))
     });
-    this.actionName = 'Редактировать';
   }
 
   private getDTValue(m) {
@@ -76,7 +80,7 @@ export class PeopleFormComponent implements OnInit {
     };
   }
 
-  setDefaultDates() {
+  private setDefaultDates() {
     const start = moment();
     const end = moment().add(3, 'M');
     this.form.patchValue(
@@ -86,22 +90,16 @@ export class PeopleFormComponent implements OnInit {
       });
   }
 
-  onStartChanged(event: IMyDateModel) {
-    const start = moment(event.formatted, 'DD.MM.YYYY').add(3, 'M');
-    if (start.isValid()) {
-      this.form.patchValue({'end': {
-        date: {
-          year: start.format('YYYY'),
-          month: start.format('M'),
-          day: start.format('D')
-        }
-      }});
+  public onStartChanged(event: IMyDateModel) {
+    const end = moment(event.formatted, 'DD.MM.YYYY').add(3, 'M');
+    if (end.isValid()) {
+      this.form.patchValue({'end': this.getDTValue(end)});
     } else {
       this.form.patchValue({'end': ''});
     }
   }
 
-  onDelete() {
+  public onDelete() {
     swal({
       title: 'Подтвердите действие',
       text: `Вы уверены, что хотите удалить пользователя ${this.person.email}`,
@@ -116,11 +114,12 @@ export class PeopleFormComponent implements OnInit {
         .subscribe((res) => {
           this.router.navigate(['/course', 1]);
         });
-    }).catch(() => {});
+    }).catch(() => {
+    });
   }
 
-  onSubmit() {
-    const { value } = this.form;
+  public onSubmit() {
+    const {value} = this.form;
     const person = {
       email: value.email,
       dateStart: this.getDate(value.start.date),
@@ -128,37 +127,45 @@ export class PeopleFormComponent implements OnInit {
       courseId: +value.course
     };
 
-    if (!this.person) {
-      this.peopleService.addPerson(person)
-        .subscribe((response) => {
-          if (response.error) {
-            swal('Oops...', response.error, 'error');
-          } else {
-            this.notifications.success(
-              'Уведомление',
-              'Пользователь добавлен'
-            );
-          }
-        });
-      this.form.reset();
-      this.setDefaultDates();
+    if (!this.isEdit) {
+      this.addPerson(person);
     } else {
-      const updatedPerson = Object.assign(person, {
-        id: this.person.customerId,
-        oldCourseId: this.person.courseId
-      });
-      this.peopleService.updatePerson(updatedPerson)
-        .subscribe((response) => {
-          if (response.error) {
-            swal('Oops...', response.error, 'error');
-          } else {
-            this.notifications.success(
-              'Уведомление',
-              'Пользователь обновлен'
-            );
-          }
-        });
+      this.updatePerson(person);
     }
+  }
+
+  private addPerson(person) {
+    this.peopleService.addPerson(person)
+      .subscribe((response) => {
+        if (response.error) {
+          swal('Oops...', response.error, 'error');
+        } else {
+          this.notifications.success(
+            'Уведомление',
+            'Пользователь добавлен'
+          );
+        }
+      });
+    this.form.reset();
+    this.setDefaultDates();
+  }
+
+  private updatePerson(person) {
+    const updatedPerson = Object.assign(person, {
+      id: this.person.customerId,
+      oldCourseId: this.person.courseId
+    });
+    this.peopleService.updatePerson(updatedPerson)
+      .subscribe((response) => {
+        if (response.error) {
+          swal('Oops...', response.error, 'error');
+        } else {
+          this.notifications.success(
+            'Уведомление',
+            'Пользователь обновлен'
+          );
+        }
+      });
   }
 
   private getDate(value: any): string {
